@@ -1,16 +1,31 @@
 from rest_framework import serializers
-from .models import Event
+from .models import Event, Booking
+from accounts.serializers import UserSerializer
+
 
 class EventSerializer(serializers.ModelSerializer):
+    type_display = serializers.SerializerMethodField()
+    count_bookings = serializers.SerializerMethodField()
+    has_places = serializers.SerializerMethodField()
+
     class Meta:
         model = Event
         fields = '__all__'
 
-#    def validate(self, data):
-#        if self._args != ():
-#            return data
-#        events = Event.objects.filter(date=data['date'], room=data['room'])
-#        if events.exists():
-#            raise serializers.ValidationError("There is an event for this date and room")
-#        return data
-        
+    def get_type_display(self, obj):
+        return obj.get_type_display()
+
+    def get_count_bookings(self, obj):
+        return obj.count_bookings()
+
+    def get_has_places(self, obj):
+        return obj.has_places()
+
+
+class BookingSerializer(serializers.ModelSerializer):
+#    event = EventSerializer()
+#    user = UserSerializer()
+
+    class Meta:
+        model = Booking
+        fields = '__all__'

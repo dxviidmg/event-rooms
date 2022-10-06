@@ -11,7 +11,20 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    users = models.ManyToManyField(User, null=True, blank=True)
 
     def __str__(self) -> str:
         return '{}'.format(self.name)
+
+    def count_bookings(self):
+        return self.bookings.all().count()
+
+    def has_places(self):
+        return self.bookings.all().count() < self.room.capacity
+
+
+class Booking(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='bookings')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['event', 'user']
