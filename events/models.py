@@ -11,7 +11,7 @@ class Event(models.Model):
     date = models.DateField()
     time = models.TimeField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    users = models.ManyToManyField(User)
+    users = models.ManyToManyField(User, null=True, blank=True)
 
     def __str__(self) -> str:
         return '{}'.format(self.name)
