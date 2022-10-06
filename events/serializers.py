@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Event, Booking
-from accounts.serializers import UserSerializer
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -23,9 +22,6 @@ class EventSerializer(serializers.ModelSerializer):
 
 
 class BookingSerializer(serializers.ModelSerializer):
-#    event = EventSerializer()
-#    user = UserSerializer()
-
     class Meta:
         model = Booking
         fields = '__all__'

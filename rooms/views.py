@@ -8,11 +8,13 @@ from rest_framework.response import Response
 from rest_framework.serializers import ValidationError
 
 
+# The business can create a room with M capacity
 class RoomViewSet(viewsets.ModelViewSet):
     permission_classes = [IsBussinesUser, IsAuthenticated]
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
+    # The business can delete a room if said room does not have any events.
     def destroy(self, request, pk=None):
         room = self.get_object()
         events = Event.objects.filter(room=room)

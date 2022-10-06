@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from rooms.models import Room
 from accounts.models import User
@@ -7,6 +6,7 @@ from accounts.models import User
 class Event(models.Model):
     type_choices = ((1, 'Public'), (2, 'Private'))
     name = models.CharField(max_length=30)
+    # There are two types of events: public and private.
     type = models.PositiveSmallIntegerField(choices=type_choices)
     date = models.DateField()
     time = models.TimeField()
@@ -28,3 +28,9 @@ class Booking(models.Model):
 
     class Meta:
         unique_together = ['event', 'user']
+
+
+
+
+
+
