@@ -10,7 +10,7 @@ from rest_framework.serializers import ValidationError
 
 # The business can create a room with M capacity
 class RoomViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsBussinesUser, IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsBussinesUser]
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 

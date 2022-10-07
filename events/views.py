@@ -15,7 +15,7 @@ class EventViewSet(viewsets.ModelViewSet):
         if self.request.method in permissions.SAFE_METHODS:
             return [IsAuthenticated()]
         # The business can create events for every room.
-        return [IsBussinesUser(), IsAuthenticated()]
+        return [IsAuthenticated(), IsBussinesUser()]
 
     def get_queryset(self):
         if self.request.user.get_type_display() == 'Customer':
