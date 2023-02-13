@@ -1,9 +1,9 @@
 # event-rooms
 
-# Requirements
+## Requirements
 * python-3.9.14
 
-# Run
+## Run
 * python manage.py makemigrations
 * python manage.py migrate
 * python manage.py runserver
